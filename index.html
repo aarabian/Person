@@ -9,24 +9,46 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body onload="showData()">
+    <div class="col-md-12 d-flex justify-content-center">
+        <div id="loadData" class="load_data">loading...</div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="buttons text-center">
-                    <input type="button" value="Add" class="btn btn-primary add-person" onclick="showAddSection()">
-                    <input type="button" value="Edit" class="btn btn-warning edit-person">
-                    <input type="button" value="Delete" class="btn btn-danger delete-person">
+                    <input type="button" value="Add" id="showAdd" class="btn btn-primary add-person"
+                        onclick="showAddSection()">
+                </div>
+                <div id="showAddModal" class="modal">
+
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Add User</h2>
+                            <span class="close">&times;</span>
+                        </div>
+                        <div class="modal-body">
+                            <label for="Name">Name:</label>
+                            <input type="text" class="form-control" id="Name" placeholder="Name">
+                            <label for="Family">Family:</label>
+                            <input type="text" class="form-control" id="Family" placeholder="Family">
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-primary" value="Add Person" onclick="createData()">
+                        </div>
+                    </div>
+
                 </div>
             </div>
-            <div class="col-md-12">
+            <!-- <div class="col-md-12">
                 <div class="change-person-section">
-                    <div class="add-person-section displayNone" id="adp">
+                    <div class="add-person-section displayNone" id="addPerson">
                         <label for="Name">Name:</label>
                         <input type="text" class="form-control" id="Name" placeholder="Name">
                         <label for="Family">Family:</label>
                         <input type="text" class="form-control" id="Family" placeholder="Family">
-                        <input type="button" class="btn btn-primary" value="Add Person">
+                        <input type="button" class="btn btn-primary" value="Add Person" onclick="createData()">
                     </div>
                     <div class="edit-person-section displayNone"></div>
                     <div class="delet-person-section displayNone"></div>
@@ -34,11 +56,31 @@
             </div>
             <div class="col-md-12">
                 <div class="view-peson-section"></div>
-            </div>
+            </div> -->
         </div>
     </div>
-<p id="demo">vcbxvcb</p>
 
+
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit User</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <label for="Name">Name:</label>
+                <input type="text" class="form-control" id="nameEdit" placeholder="Name">
+                <label for="Family">Family:</label>
+                <input type="text" class="form-control" id="familyEdit" placeholder="Family">
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-primary" value="Edit Person" onclick="editData()">
+            </div>
+        </div>
+
+    </div>
 
 </body>
 <!-- <script src="js/bootstrap.bundle.js"></script> -->
