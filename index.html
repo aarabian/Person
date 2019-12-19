@@ -61,7 +61,7 @@
     </div>
 
 
-    <div id="myModal" class="modal">
+    <div id="showEditModal" class="modal">
 
         <!-- Modal content -->
         <div class="modal-content">
@@ -70,13 +70,14 @@
                 <span class="close">&times;</span>
             </div>
             <div class="modal-body">
+                <input type="hidden" id="userId" value="">
                 <label for="Name">Name:</label>
                 <input type="text" class="form-control" id="nameEdit" placeholder="Name">
                 <label for="Family">Family:</label>
                 <input type="text" class="form-control" id="familyEdit" placeholder="Family">
             </div>
             <div class="modal-footer">
-                <input type="button" class="btn btn-primary" value="Edit Person" onclick="editData()">
+                <input type="button" class="btn btn-primary" value="Edit Person" onclick="editData(this.userId)">
             </div>
         </div>
 
