@@ -62,7 +62,6 @@ function showData() {
                     + "<button id=" + myObj.data[i].id
                     + " onclick='deleteData(this.id)' class='deletebtn btn btn-danger'>delete</button>"
                     + "</tr>";
-                console.log(myObj.data[i].last_name);
             }
 
             txt += "</table>"
@@ -98,6 +97,11 @@ function createData() {
     };
     var data = JSON.stringify({ "first_name": name, "last_name": family });
     xhr.send(data);
+
+    var AddModal = document.getElementById("showAddModal");
+    AddModal.onclick = function () {
+        AddModal.style.display = "none";
+    }
 }
 
 
@@ -121,18 +125,32 @@ function deleteData(dataid) {
         xmlhttp.open("GET", "https://reqres.in/api/users/2", true);
         xmlhttp.send(); */
 
-    var xhr = new XMLHttpRequest();
-    var url = "https://reqres.in/api/users/2";
+    // var xhr = new XMLHttpRequest();
+    // var url = "https://reqres.in/api/users/2";
 
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var json = JSON.parse(xhr.responseText);
+    // xhr.open("POST", url, true);
+    // xhr.setRequestHeader("Content-Type", "application/json");
+    // xhr.onreadystatechange = function () {
+    //     if (xhr.readyState === 4 && xhr.status === 200) {
+    //         var json = JSON.parse(xhr.responseText);
+    //     }
+    // };
+    // var data = JSON.stringify({ "id": dataid });
+    // xhr.send(data);
+
+
+    var url = "https://reqres.in/api/users/";
+    var xhr = new XMLHttpRequest();
+    xhr.open("DELETE", url + dataid, true);
+    xhr.onload = function () {
+        var users = JSON.parse(xhr.responseText);
+        if (xhr.readyState == 4 && xhr.status == "204") {
+            console.table(users);
+        } else {
+            console.error(users);
         }
-    };
-    var data = JSON.stringify({ "id": dataid });
-    xhr.send(data);
+    }
+    xhr.send();
 
 }
 
@@ -150,8 +168,6 @@ function showEditBox(dataID, name) {
     document.getElementById('userId').value = dataID;
     document.getElementById('nameEdit').value = fName;
     document.getElementById('familyEdit').value = lName;
-
-    debugger;
 
 
     // xmlhttp.onreadystatechange = function () {
@@ -219,22 +235,51 @@ function showEditBox(dataID, name) {
 
 function editData(userId) {
 
-    var xhr = new XMLHttpRequest();
-    var url = "https://reqres.in/api/users/2";
+    // var xhr = new XMLHttpRequest();
+    // var url = "https://reqres.in/api/users/2";
+    // var userId = document.getElementById('userId').value;
+    // var name = document.getElementById('nameEdit').value;
+    // var family = document.getElementById('familyEdit').value;
+
+    // xhr.open("POST", url, true);
+    // xhr.setRequestHeader("Content-Type", "application/json");
+    // xhr.onreadystatechange = function () {
+    //     if (xhr.readyState === 4 && xhr.status === 200) {
+    //         var json = JSON.parse(xhr.responseText);
+    //     }
+    // };
+    // var data = JSON.stringify({ "id": userId, "first_name": name, "last_name": family });
+    // xhr.send(data);
+
+
+    var url = "https://reqres.in/api/users/";
+
     var userId = document.getElementById('userId').value;
-    var name = document.getElementById('nameEdit').value;
-    var family = document.getElementById('familyEdit').value;
 
-    debugger;
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var json = JSON.parse(xhr.responseText);
+    var data = {};
+    data.firstname = document.getElementById('nameEdit').value;
+    data.lastname = document.getElementById('familyEdit').value;
+    var json = JSON.stringify(data);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("PUT", url + userId, true);
+    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    xhr.onload = function () {
+        var users = JSON.parse(xhr.responseText);
+        if (xhr.readyState == 4 && xhr.status == "200") {
+            console.table(users);
+        } else {
+            console.error(users);
         }
-    };
-    var data = JSON.stringify({ "id": userId, "first_name": name, "last_name": family });
-    xhr.send(data);
-    debugger;
+    }
+    xhr.send(json);
 
+
+
+
+
+    var EditModal = document.getElementById("showEditModal");
+    EditModal.onclick = function () {
+        EditModal.style.display = "none";
+    }
 }
